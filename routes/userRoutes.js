@@ -1,16 +1,22 @@
 express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController')
+const rules = require('../utils/rules')
+
+
 
 
 router.get('/', userController.getAllUsers)
-router.get('/:id', userController.getUserById)
+router.get(
+    '/:id', 
+    rules.id,
+    userController.getUserById
+)
 
 
-router.post('/', userController.createUser)
-
-
-
-
+router.post(
+    '/', 
+    [rules.name, rules.email, rules.password],
+    userController.createUser
+)
 module.exports = router;
-

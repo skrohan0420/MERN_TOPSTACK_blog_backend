@@ -1,6 +1,8 @@
 express = require('express');
 const app = express()
 const userRoutes = require('./routes/userRoutes')
+const mongoDB = require('./database/db')
+mongoDB();
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true })) 
