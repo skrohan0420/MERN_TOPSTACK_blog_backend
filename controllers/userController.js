@@ -58,7 +58,7 @@ const createUser = asyncWrapper(async (req, res) => {
 
 })
 
-let getUserById = asyncWrapper(async (req, res) => {
+const getUserById = asyncWrapper(async (req, res) => {
     validate(req)
 
     const { id } = req.params
