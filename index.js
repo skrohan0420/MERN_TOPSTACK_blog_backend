@@ -3,8 +3,11 @@ const app = express()
 const userRoutes = require('./routes/userRoutes')
 const authRoutes = require('./routes/authRoutes')
 const mongoDB = require('./database/db')
+const cors = require('cors');
 mongoDB();
 
+
+app.use(cors());
 app.use(express.json())
 app.use(express.urlencoded({ extended: true })) 
 

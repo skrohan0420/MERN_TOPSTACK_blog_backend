@@ -14,7 +14,7 @@ const signUp = asyncWrapper(async (req, res) => {
     if (isUserExist.length > 0) {
         return res.status(400).json({
             status: false,
-            message: 'User Already Exist',
+            message: 'Email Already Exist',
         })
     }
     
@@ -52,7 +52,7 @@ const signIn = asyncWrapper(async (req, res) => {
     if (isUserExist.length === 0) {
         return res.status(400).json({
             status: false,
-            message: 'User Not Found',
+            message: 'Email Not Found',
         })
     }
     
