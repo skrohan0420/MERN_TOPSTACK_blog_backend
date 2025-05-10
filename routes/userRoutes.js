@@ -19,4 +19,10 @@ router.post(
     [rules.name, rules.email, rules.password],
     userController.createUser
 )
+
+router.put(
+    '/:id', 
+    userController.updateUser
+)
+
 module.exports = router;
