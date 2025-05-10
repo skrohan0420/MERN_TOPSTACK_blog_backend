@@ -2,6 +2,7 @@ express = require('express');
 const app = express()
 const userRoutes = require('./routes/userRoutes')
 const authRoutes = require('./routes/authRoutes')
+// const blogRoutes = require('./routes/blogRoutes')
 const mongoDB = require('./database/db')
 const cors = require('cors');
 mongoDB();
@@ -15,6 +16,7 @@ app.use(express.urlencoded({ extended: true }))
 
 app.use('/user', userRoutes)
 app.use('/auth', authRoutes)
+// app.use('/blog', blogRoutes)
 
 
 
