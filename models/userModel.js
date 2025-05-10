@@ -22,6 +22,11 @@ const UsersSchema = new Schema(
                 message: 'Invalid email format.',
             },
         },
+        age: {
+            type: Number,
+            min: [0, 'Age cannot be negative'],
+            max: [120, 'Age cannot exceed 120'],
+        },
         password: {
             type: String,
             trim: true,
