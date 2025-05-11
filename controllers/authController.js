@@ -2,7 +2,8 @@ let asyncWrapper = require('../utils/asyncWrapper')
 let validate = require('../utils/validate')
 let { usersModel } = require('../models/userModel')
 let bycrypt = require('bcryptjs')
-
+let jwt = require('jsonwebtoken')
+let config = require('../config/config')
 
 const signUp = asyncWrapper(async (req, res) => {
     validate(req)
@@ -17,7 +18,7 @@ const signUp = asyncWrapper(async (req, res) => {
             message: 'Email Already Exist',
         })
     }
-    
+
     // Create new user
     let newUser = await usersModel.create({
         name: name,
@@ -32,11 +33,17 @@ const signUp = asyncWrapper(async (req, res) => {
             message: 'User Not Created',
         })
     }
+    
+    // Generate JWT token
+    const token = jwt.sign({ id: newUser._id }, config.JWT_SECRET_KEY, {
+        expiresIn: '24h',
+    })
 
     return res.status(200).json({
         status: true,
         message: 'User Created Successfully',
         data: newUser,
+        token: token,
     })
 
 
@@ -55,7 +62,7 @@ const signIn = asyncWrapper(async (req, res) => {
             message: 'Email Not Found',
         })
     }
-    
+
     // Check if password is correct
     let isPasswordCorrect = await bycrypt.compare(password, isUserExist[0].password)
     if (!isPasswordCorrect) {
@@ -64,11 +71,16 @@ const signIn = asyncWrapper(async (req, res) => {
             message: 'Invalid Password',
         })
     }
+    // Generate JWT token
+    const token = jwt.sign({ id: isUserExist[0]._id }, config.JWT_SECRET_KEY, {
+        expiresIn: '24h',
+    })
 
     return res.status(200).json({
         status: true,
         message: 'User Signed In Successfully',
         data: isUserExist[0],
+        token: token,
     })
 
 })
