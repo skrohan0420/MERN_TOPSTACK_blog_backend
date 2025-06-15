@@ -31,5 +31,9 @@ app.use('/blog', blogRoutes)
 // TRACE - to perform a message loop-back test along the path to the target resource
 // CONNECT - to establish a tunnel to the server identified by the target resource
 
+// MVC 
+// Model - Represents the data and business logic
+// View - Represents the user interface
+// Controller - Handles user input and interacts with the model
 
 app.listen(8000)
